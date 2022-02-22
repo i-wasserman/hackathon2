@@ -174,7 +174,7 @@ function update() {
   for (var l = 0; l < words.length; l++) {
     text(words[l].id, words[l].x, words[l].y);
   }
-  // scl = Math.floor(score / 20) - 4;
+
   var tempE = [];
   for(var g = 0; g<letsO.length;g++){
     if(letsO[g].y < 600){
