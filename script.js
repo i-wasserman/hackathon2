@@ -199,6 +199,8 @@ function update() {
   if(tempH != words && tempH != []){
     words = tempH;
   }/*
+
+
   if(lives<=0){
     stop();
     background(190);
