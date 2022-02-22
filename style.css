@@ -1,0 +1,20 @@
+h1{
+  font-size:125%;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+}
+
+#score {
+  padding-top: 20;
+  color: white;
+  font-weight: bold;
+
+}
+
+body{
+  text-align: center;
+  color: white;
+  font-weight: bold;
+
+}

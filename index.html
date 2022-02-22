@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  </head>
+  <body class="w3-monospace">
+    <!-- <img src = code-matrix.gif > -->
+    <h1 class="w3-monospace">Matrix Typer</h1>
+    <button id="startButton" onClick ="startNewGame()" class="w3-button w3-green w3-round-large">Start Game</button>
+    <button id="stopButton" onClick ="stop()" class="w3-button w3-green w3-round-large">Pause Game</button>
+    <button id='restartButton' onClick ='restart()'' class='w3-button w3-green w3-round-large'>Restart Game</button>
+    <br>
+    <div id ="score">Score: 0</div>
+    <div id ="lives">Lives: 5</div>
+    
+    <br>
+    <script src="script.js"></script>
+    <style>
+      body {
+        background-image: url('matrix-code.jpeg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+      }
+    </style>
+  </body>
+</html>
