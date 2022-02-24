@@ -20,6 +20,7 @@ var letsO = [];
 var repeater = setInterval('','');
 var score = 0;
 var lives = 5;
+var paused = 0;
 
 //Background 
 function setup() {
@@ -39,7 +40,10 @@ function startNewGame() {
   }
   repeater = setInterval(show,900);
   yspeed = 1;
-  score = 0;
+  if (paused == 0) {
+    score = 0;
+  }
+  paused = 0;
   document.getElementById('score').innerHTML = "Score:" + score;
   lives = 5;
   document.getElementById('lives').innerHTML = "Lives: " + lives;
@@ -48,6 +52,7 @@ function startNewGame() {
 function stop(){
   clearInterval(repeater);
   yspeed = 0;
+  paused = 1;
 }
 
 //letter color and positions
@@ -130,7 +135,6 @@ class Letter {
         }
         words = tempa;
       }
-      
     }
   }
 }
@@ -153,16 +157,7 @@ function draw() {
 
 //makes letters move
 function update() {
-  for (var i = 0; i < letsO.length; i++) {
-    if(scl > 0){
-      letsO[i].y = letsO[i].y + yspeed * scl;
-    }else{
-      letsO[i].y = letsO[i].y + yspeed;
-    }
-  }
-  for (var k = 0; k < words.length; k++) {
-    words[k].y = words[k].y + yspeed;
-  }
+  newPositions();
   background(0, 0, 0);
   for (var j = 0; j < letsO.length; j++) {
     text(letsO[j].id, letsO[j].x, letsO[j].y);
@@ -174,6 +169,19 @@ function update() {
   loseLife();
   death();
 } 
+
+function newPositions() {
+  for (var i = 0; i < letsO.length; i++) {
+    if(scl > 0){
+      letsO[i].y = letsO[i].y + yspeed * scl;
+    }else{
+      letsO[i].y = letsO[i].y + yspeed;
+    }
+  }
+  for (var k = 0; k < words.length; k++) {
+    words[k].y = words[k].y + yspeed;
+  }
+}
 
 function eraseLetters(){
   var tempE = [];
