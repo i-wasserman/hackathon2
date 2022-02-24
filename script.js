@@ -7,7 +7,6 @@ var mediumWords = ["unicorn","pancake","creative","graft","shrouded","eroded","s
 var hardWords = ["exclusive", "phenomenon","hypodermic","perpendicular","cryonic","vivacious","iridescent","archaic","halcyon","cataclysmic","stratosphere","impossible","dictionary","encyclopedic","centennial","anachronistic","deplorable","salacious","generations","description","encouraged","enamored","endothermic","entropic","providers","denominator","atrociously","fountains","enigmatic", "misspelled", "intelligence", "pronunciation", "handkerchief", "iogorrhea", "chiaroscurist", "verisimilitude", "sesquipedalian", "worcestershire", "hippopotomonstrosesquippedaliophobia"]
 
 var words = [];
-//test
 
 var codes = [65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90];
 
@@ -30,6 +29,7 @@ function setup() {
   stroke(255,0,0);
   line(0, 800, 1000, 800);
 }
+
 //When you hit the start game button
 function startNewGame() {
   console.log('game start');
@@ -57,41 +57,39 @@ function show() {
     var randB = int(random(0, numPos));
     var randC = int(random(0, letters.length - 1));
     var randD = int(random(0, numPos));
-    r = random(255);
-    g = random(100, 200);
-    b = random(100);
-    a = random(200, 255);
     fill(0, 280, 0, 255);
     textSize(20);
     textFont('Courier New');
-    
-    if (score <= 20){
+
+    if (yspeed > 0){
+      if (score <= 20){
       text(letters[randC], pos[randD], 40);
       letsO.push(new Letter(letters[randC], pos[randD], 40));
-    }
-    if (score > 20 && score <= 100){
-      text(easyWords[rand], pos[randB], 40);
-      words.push(new Letter(easyWords[rand], pos[randB], 40));
-    }else if(score <= 250 && score > 100){
-      text(mediumWords[rand], pos[randB], 40);
-      words.push(new Letter(mediumWords[rand], pos[randB], 40));
-    }else if(score > 250){
-      text(hardWords[rand], pos[randB], 40);
-      words.push(new Letter(hardWords[rand], pos[randB], 40));
-    }
-    for(var k = 0; k < words.length; k++){
-      var currentWord = words[k].id;
-      letsO.push(new Letter(currentWord.substring(0,1), pos[randB], 40));
+      }
+      if (score > 20 && score <= 100){
+        text(easyWords[rand], pos[randB], 40);
+        words.push(new Letter(easyWords[rand], pos[randB], 40));
+      }else if(score <= 250 && score > 100){
+        text(mediumWords[rand], pos[randB], 40);
+        words.push(new Letter(mediumWords[rand], pos[randB], 40));
+      }else if(score > 250){
+        text(hardWords[rand], pos[randB], 40);
+        words.push(new Letter(hardWords[rand], pos[randB], 40));
+      }
+      for(var k = 0; k < words.length; k++){
+        var currentWord = words[k].id;
+        letsO.push(new Letter(currentWord.substring(0,1), pos[randB], 40));
+      }
     }
   }
 }
-
 
 
 function gC(inp) {
   var place = letters.indexOf(inp);
   return codes[place];
 }
+
 //letter class
 class Letter {
   constructor(id, x, y) {
@@ -117,7 +115,7 @@ class Letter {
         letsO = tempo;
       }
     }
-    //WORK ON THIS
+    
     if(score > 20){
      if(key === this.code){
         var tempa = [];
@@ -151,7 +149,6 @@ function keyPressed(){
 
 function draw() {
   update();
-
 }
 
 //makes letters move
@@ -162,7 +159,6 @@ function update() {
     }else{
       letsO[i].y = letsO[i].y + yspeed;
     }
-    
   }
   for (var k = 0; k < words.length; k++) {
     words[k].y = words[k].y + yspeed;
@@ -174,9 +170,14 @@ function update() {
   for (var l = 0; l < words.length; l++) {
     text(words[l].id, words[l].x, words[l].y);
   }
+  eraseLetters();
+  loseLife();
+  death();
+} 
 
+function eraseLetters(){
   var tempE = [];
-  for(var g = 0; g<letsO.length;g++){
+  for(var g = 0; g < letsO.length; g++){
     if(letsO[g].y < 600){
       tempE.push(letsO[g]);
     }else{
@@ -187,8 +188,11 @@ function update() {
   if(tempE != letsO){
     letsO = tempE;
   }
+}
+
+function loseLife() {
   var tempH = [];
-  for(var h = 0; h<words.length;h++){
+  for(var h = 0; h < words.length; h++){
     if(words[h].y < 600){
       tempH.push(words[h]);
     }else{
@@ -198,9 +202,11 @@ function update() {
   }
   if(tempH != words && tempH != []){
     words = tempH;
-  }/*
+  }
+}
 
-
+function death(){
+  /*
   if(lives<=0){
     stop();
     background(190);
@@ -211,7 +217,7 @@ function update() {
     textSize(150);
     text('DEATH', 200, 200);
   }*/
-} 
+}
 
 
 function restart(){
@@ -221,36 +227,3 @@ function restart(){
   lives = 5;
   startNewGame();
 }
-
-
-
-
-// function keyPressed(){
-//   if(keyCode === gC('a')){
-//     console.log('help');
-//   }
-
-//   if(keyCode === gC('b')){
-//     console.log('me');
-//   }
-
-//   if(keyCode === UP_ARROW){
-
-//   }
-
-//   if(keyCode === UP_ARROW){
-
-//   }
-
-// }
-
-
-
-
-
-
-// function draw() {
-//   noStroke()
-//   fill(random(colorlist));
-//   ellipse(mouseX, mouseY, 25, 15);
-// }
